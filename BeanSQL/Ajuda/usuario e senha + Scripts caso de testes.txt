@@ -1,0 +1,114 @@
+//Informações sobre o programa
+Usuario default: root
+Senha default: root
+
+1 Contem um arquivo bat que executa o programa BeanSQL 2013 - v19.0 Beta Edition.jar
+2 o programa cria uma pasta "data" onde fica os arquivos ".database" que armazena os banco de dados, tabelas e registros;
+3 O programa possui um help das operações suportadas;
+4 O programa foi feito com base na syntax do MySql e visualização pelo prompt.
+5 Programa atualmente só funciona pelo prompt ou terminal, devido as entradas e saida de dados.
+
+
+//casos de teste abaixo
+
+-- Aviões comentario
+CREATE DATABASE avioes;
+USE avioes;
+CREATE TABLE aeroportos ( codaerop INTEGER PRIMARY KEY,nome VARCHAR(30), local VARCHAR(30),pais VARCHAR(30));
+ 
+CREATE TABLE modelos ( codmodelo INTEGER PRIMARY KEY,construtor VARCHAR(20), versao VARCHAR(20),nummotores VARCHAR(20));
+ 
+CREATE TABLE avioes ( codaviao INTEGER PRIMARY KEY, nome VARCHAR(30), codmodelo INTEGER);
+ 
+CREATE TABLE voos ( codvoo integer PRIMARY KEY, decodaerop integer,paracodaerop integer,
+  transportadora VARCHAR(20), duracao INTEGER, codaviao INTEGER);
+ 
+INSERT INTO aeroportos  VALUES  (1,'Sa Carneiro','Porto','Portugal');
+INSERT INTO aeroportos  VALUES  (3,'Portela','Lisboa','Portugal');
+INSERT INTO aeroportos  VALUES  (5,'Faro','Faro','Portugal');
+INSERT INTO aeroportos  VALUES  (2,'Madeira','Funchal','Portugal');
+INSERT INTO aeroportos  VALUES  (4,'Ponta Delgada','S. Miguel','Portugal');
+INSERT INTO aeroportos  VALUES  (9,'Orly','Paris','Franca');
+INSERT INTO aeroportos  VALUES  (8,'Charles de Gaule','Paris','Franca');
+INSERT INTO aeroportos  VALUES  (11,'Heathrow','Londres','Reino Unido');
+INSERT INTO aeroportos  VALUES  (12,'Gatwick','Londres','Reino Unido');
+INSERT INTO modelos  VALUES  (1,'Douglas','DC-10','3');
+INSERT INTO modelos  VALUES  (2,'Boing','737','2');
+INSERT INTO modelos  VALUES  (3,'Boing','747','4');
+INSERT INTO modelos  VALUES  (4,'Airbus','A300','2');
+INSERT INTO modelos  VALUES  (5,'Airbus','A340','4');
+INSERT INTO avioes  VALUES  (1,'Scott Adams',1);
+INSERT INTO avioes  VALUES  (2,'Milo Manara',1);
+INSERT INTO avioes  VALUES  (4,'Henki Bilal',3);
+INSERT INTO avioes  VALUES  (5,'Gary Larson',4);
+INSERT INTO avioes  VALUES  (6,'Bill Waterson',4);
+INSERT INTO avioes  VALUES  (7,'J R R Tolkien',3);
+INSERT INTO avioes  VALUES  (8,'Franquin',3);
+INSERT INTO avioes  VALUES  (9,'Douglas Adams',1);
+INSERT INTO avioes  VALUES  (3,'Serpieri',5);
+INSERT INTO voos VALUES  (1001,1,2,'TAP',2,1);
+INSERT INTO voos VALUES  (1002,2,3,'TAP',1,2);
+INSERT INTO voos VALUES  (1010,12,4,'BA',3,3);
+INSERT INTO voos VALUES  (1008,3,12,'Portugalia',3,4);
+INSERT INTO voos VALUES  (1007,5,1,'TAP',1,5);
+INSERT INTO voos VALUES  (1009,1,3,'Portugalia',1,2);
+INSERT INTO voos VALUES  (1005,9,2,'AirFrance',2,3);
+INSERT INTO voos VALUES  (1003,2,12,'BA',2,5);
+INSERT INTO voos VALUES  (1006,8,11,'BA',1,5);
+INSERT INTO voos VALUES  (1004,4,3,'SATA',3,6);
+INSERT INTO voos VALUES  (1111,1,3,'TAP',2,3);
+
+
+***consultas***
+use avioes;
+SELECT LOCAL, nome FROM aeroportos WHERE pais = 'Portugal';
+
+SELECT LOCAL as loc, nome, local FROM aeroportos WHERE pais = 'Portugal'; ok
+
+SELECT LOCAL as loc, nome, local FROM aeroportos as aero WHERE pais = 'Portugal'; ok
+
+SELECT aero.LOCAL as loc, aero.nome, aeroportos.local FROM aeroportos as aero WHERE pais = 'Portugal'; error ok
+
+SELECT nome FROM avioes JOIN modelos USING(codmodelo) WHERE versao = 'DC-10';
+
+SELECT nome, nummotores FROM avioes JOIN modelos USING(codmodelo);
+
+SELECT versao FROM modelos WHERE versao LIKE 'A3%';
+
+
+///////////////////TESTES///////////////////////////////////
+
+select aeroportos.nome, avioes.nome, pais, local from aeroportos join avioes on codaerop >=2  where pais like '%tu%' order by local desc;
+
+
+select aeroportos.nome, avioes.nome, pais, local from aeroportos join avioes order by avioes.nome desc;
+
+
+SELECT voos1.codvoo, voos2.codvoo, voos1.paracodaerop FROM voos AS voos1 join voos AS voos2
+WHERE voos1.decodaerop = 1 AND voos2.paracodaerop = 12 AND  voos1.paracodaerop = voos2.decodaerop order by voos1.codvoo;
+
+ 
+
+SELECT codvoo AS "codigo do voo", origem.LOCAL AS Origem, destino.LOCAL AS Destino
+FROM voos as v JOIN aeroportos AS origem ON decodaerop = origem.codaerop 
+JOIN aeroportos AS destino ON paracodaerop = destino.codaerop ORDER BY codvoo;
+
+
+SELECT codvoo 
+FROM voos JOIN aeroportos AS origem ON decodaerop = origem.codaerop 
+JOIN aeroportos AS destino ON paracodaerop = destino.codaerop
+WHERE origem.LOCAL = 'Porto' AND destino.LOCAL = 'Lisboa';
+
+error case sensitive in keys of hashmap ok
+SELECT codvoo, origem.local AS origem, destino.loCAL AS destino
+FROM voos JOIN aeroportos AS origem ON decodaerop = origem.codaerOP
+JOIN aeroportos AS Destino ON PARAcodaerop = Destino.codaeroP
+ORDER BY origem, destino;
+
+error ok
+SELECT codVoo, origEm.LOCAL AS oRIgem, destiNo.lOcal AS destiNO		
+FROM voOs JOIN aEroportos AS orIGem ON decoDaerop = Origem.codaeroP
+JOIN aeroPortos AS DEstino ON PARAcodaerop = DEStino.CODaerop
+ORDER BY ORIgEM, desTIno;
+
+
