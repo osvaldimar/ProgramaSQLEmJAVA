@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Login - Agenda Web</title>
+        
+        <style type="text/css">			
+			.centro { margin: 0px auto; }
+		</style>
+
+    </h:head>
+    <h:body>
+       	
+       	<!-- Carregamento com Ajax e Primefaces -->
+		<p:ajaxStatus style="width=16px; height=16px" id="ajaxStatusPanel" onstart="dialogCarregando.show();" onsuccess="dialogCarregando.hide();">
+			<f:facet name="start">
+				<h:graphicImage value="img/ajaxLoading.gif"></h:graphicImage>
+			</f:facet>
+		</p:ajaxStatus>
+		<p:dialog modal="false" header="Carregando" closable="false" widgetVar="dialogCarregando" resizable="false">
+			<h:graphicImage value="img/ajaxLoading.gif"></h:graphicImage>
+		</p:dialog>
+		
+		<!-- Formulario para efetuar login -->
+	    <h:form id="formUsuario" >
+	    
+        	<p:panel id="painel" header="Login" style="width:50%" styleClass="centro">
+	       	    <p:messages id="msgResultado"></p:messages>
+                <h:panelGrid columns="3" style="margin:0 auto;">  
+                  
+                    <h:outputLabel value="Usuário" for="username"/>
+                    <p:inputText id="username" value="#{loginBean.username}" requiredMessage="O nome é obrigatório" required="true"/>  
+                    <p:message for="username" id="msgValidacaoUser"></p:message>
+                    
+                    <p:outputLabel value="Senha" for="password"/>
+                    <h:inputSecret id="password" value="#{loginBean.password}" requiredMessage="A senha é obrigatória" required="true"/>  
+		            <p:message for="password" id="msgValidacaoSenha"></p:message>
+		            
+		            <p:commandButton value="Entrar"  action="#{loginBean.efetuarLogin}" update="painel"/>
+		            
+                </h:panelGrid> 
+                
+                <p:separator/>
+			</p:panel>
+      	</h:form>
+        
+		
+    </h:body>
+</html>
+

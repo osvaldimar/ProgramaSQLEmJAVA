@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Bem vindo - Agenda Web</title>
+        
+        <style type="text/css">			
+			.centro { margin: 0px auto; width: 70% }
+		</style>
+		
+    </h:head>
+    <h:body>
+       	
+	<h:form id="formHome" >
+		
+			<p:toolbar styleClass="centro">  
+			    <p:toolbarGroup align="left">  
+			       	<p:commandLink  value="Adicionar Contato" action="/adicionar.jsf?faces-redirect=true"/>	        
+			    </p:toolbarGroup>
+			    <p:toolbarGroup align="right">  
+			       	<p:commandLink value="Sair" action="/login.jsf?faces-redirect=true"/>	        
+			    </p:toolbarGroup>
+			</p:toolbar>	
+					
+			<br/>		
+			<p:panel styleClass="centro">
+				<h:outputText value="Bem vindo - AgendaWeb online, faça sua pesquisa e localize seus contatos!"></h:outputText>
+			</p:panel>			
+			<br/>	
+					
+	       	<p:panel header="Lista de Contatos" styleClass="centro">
+	       		<p:growl showDetail="true"></p:growl>
+	       		
+	       		<p:dataTable id="dataTable" var="contatoVar" value="#{contatoPesquisaBean.listaContatos}" widgetVar="contatoTable"   
+		            style="align=left" emptyMessage="Não há contatos" filteredValue="#{contatoPesquisaBean.listaContatosFiltro}">  
+		  
+			        <p:column id="nomeColumn" filterBy="#{contatoVar.nome}"   
+			                headerText="Localizar contatos" filterMatchMode="contains"> 			                 
+			            <p:commandLink action="#{contatoVisualBean.visualizarID(contatoVar.id)}" value="#{contatoVar.nome}"/>
+			        </p:column>
+			        
+			         <p:column id="emailColumn" headerText="Email"> 
+			            <h:outputText value="#{contatoVar.email}" />  
+			        </p:column> 
+			        <p:column id="enderecoColumn" headerText="Endereço"> 
+			            <h:outputText value="#{contatoVar.endereco}" />  
+			        </p:column> 
+			        <p:column id="telefonesColumn" headerText="Telefones"> 
+			            <h:outputText value="#{contatoVar.todosTelefones}" />
+			        </p:column> 
+			        
+	       		</p:dataTable>
+	       		
+	       	</p:panel>
+	       	
+ 	</h:form>
+ 	
+    </h:body>
+</html>
+

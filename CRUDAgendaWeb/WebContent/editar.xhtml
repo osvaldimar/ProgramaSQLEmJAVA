@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Editar contato</title>
+        
+		<style type="text/css">			
+			.centro { margin: 0px auto; width: 65% }
+		</style>
+		
+    </h:head>
+    <h:body>
+
+	<!-- Carregamento com Ajax e Primefaces -->
+		<p:ajaxStatus style="width=16px; height=16px" id="ajaxStatusPanel" onstart="dialogCarregando.show();" onsuccess="dialogCarregando.hide();">
+			<f:facet name="start">
+				<h:graphicImage value="img/ajaxLoading.gif"></h:graphicImage>
+			</f:facet>
+		</p:ajaxStatus>
+		<p:dialog modal="false" header="Salvando alterações" closable="false" widgetVar="dialogCarregando" resizable="false">
+			<h:graphicImage value="img/ajaxLoading.gif"></h:graphicImage>
+		</p:dialog>
+		
+	<!-- Formulario para efetuar login -->
+	<h:form id="formCadastro" >
+		
+		<p:toolbar styleClass="centro">  
+		    <p:toolbarGroup align="left">  
+		       	<p:commandLink  value="Home" action="/home.jsf?faces-redirect=true" immediate="true" ajax="false"/>	        
+		    </p:toolbarGroup>
+		    <p:toolbarGroup align="left">
+		    	<p:commandLink value="Cancelar" action="/visualizar.jsf?faces-redirect=true" 
+		    		immediate="true" ajax="false" style="margin:40px"/>
+		    </p:toolbarGroup>
+		    <p:toolbarGroup align="left">
+		    	<p:commandLink value="Excluir contato" action="#{contatoVisualBean.excluirContato}" 
+		    		immediate="true" style="margin:20px"/>
+		    </p:toolbarGroup>
+		    <p:toolbarGroup align="right">  
+		       	<p:commandLink value="Sair" action="/login.jsf?faces-redirect=true"/>	        
+		    </p:toolbarGroup>
+		</p:toolbar>
+		<br/>
+		
+		<br/>		
+		<p:panel styleClass="centro">
+			<h:outputText value="Faça as alterações de seu contato no formulário abaixo"></h:outputText>
+		</p:panel>			
+		<br/>
+		
+		<p:panel id="painel" header="Editar contato" styleClass="centro">
+		<p:growl showDetail="true"></p:growl>
+		
+		<h:panelGrid columns="3">
+			<p:outputLabel for="nome">Nome</p:outputLabel>
+			<p:inputText id="nome" value="#{contatoVisualBean.contatoVisual.nome}"></p:inputText>
+			<br/>
+			
+			<p:outputLabel for="email">Email</p:outputLabel>
+			<p:inputText id="email" value="#{contatoVisualBean.contatoVisual.email}"></p:inputText>
+			<br/>
+			
+			<p:outputLabel for="endereco">Endereco</p:outputLabel>
+			<p:inputText id="endereco" value="#{contatoVisualBean.contatoVisual.endereco}"></p:inputText>
+			<br/>
+			
+			<p:outputLabel for="tel1">Telefone</p:outputLabel>
+			<p:inputMask id="tel1" value="#{contatoVisualBean.telefone1.numero}" mask="(99) 99999999?9"/>			
+	        <p:selectOneMenu value="#{contatoVisualBean.telefone1.tipoTelefone}">  
+	            <f:selectItem itemLabel="CELULAR" itemValue="CELULAR" />  
+	            <f:selectItem itemLabel="CASA" itemValue="CASA" />  
+	            <f:selectItem itemLabel="COMERCIAL" itemValue="COMERCIAL" />  
+	            <f:selectItem itemLabel="FAX" itemValue="FAX" />  
+	            <f:selectItem itemLabel="PAGER" itemValue="PAGER" />  
+	            <f:selectItem itemLabel="OUTROS" itemValue="OUTROS" />  
+	        </p:selectOneMenu>
+        	 
+			<p:outputLabel for="tel2">Telefone</p:outputLabel>
+			<p:inputMask id="tel2" value="#{contatoVisualBean.telefone2.numero}" mask="(99) 99999999?9"/>
+			<p:selectOneMenu value="#{contatoVisualBean.telefone2.tipoTelefone}">  
+	            <f:selectItem itemLabel="CELULAR" itemValue="CELULAR" />  
+	            <f:selectItem itemLabel="CASA" itemValue="CASA" />  
+	            <f:selectItem itemLabel="COMERCIAL" itemValue="COMERCIAL" />  
+	            <f:selectItem itemLabel="FAX" itemValue="FAX" />  
+	            <f:selectItem itemLabel="PAGER" itemValue="PAGER" />  
+	            <f:selectItem itemLabel="OUTROS" itemValue="OUTROS" />  
+	        </p:selectOneMenu>	
+			
+			<p:outputLabel for="tel3">Telefone</p:outputLabel>
+			<p:inputMask id="tel3" value="#{contatoVisualBean.telefone3.numero}" mask="(99) 99999999?9"/>
+			<p:selectOneMenu value="#{contatoVisualBean.telefone3.tipoTelefone}">  
+	            <f:selectItem itemLabel="CELULAR" itemValue="CELULAR" />  
+	            <f:selectItem itemLabel="CASA" itemValue="CASA" />  
+	            <f:selectItem itemLabel="COMERCIAL" itemValue="COMERCIAL" />  
+	            <f:selectItem itemLabel="FAX" itemValue="FAX" />  
+	            <f:selectItem itemLabel="PAGER" itemValue="PAGER" />  
+	            <f:selectItem itemLabel="OUTROS" itemValue="OUTROS" />  
+	        </p:selectOneMenu>		
+	        
+			<p:commandButton value="Salvar alterações" action="#{contatoVisualBean.salvarAlteracoes}" update="painel"/>
+		
+		</h:panelGrid>
+		</p:panel>
+		
+	</h:form>
+
+    </h:body>
+</html>

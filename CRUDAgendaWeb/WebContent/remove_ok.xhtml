@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Contato excluido</title>
+        
+		<style type="text/css">			
+			.centro { margin: 0px auto; width: 60% }
+		</style>
+		
+    </h:head>
+    <h:body>
+	
+	<!-- Formulario para efetuar login -->
+	<h:form id="formCadastro" >
+		
+		<p:growl showDetail="true"/>
+		
+		<br/>		
+		<p:panel styleClass="centro">
+		
+			<p:toolbar>  
+			
+		    	<p:toolbarGroup align="left">
+					<p:commandLink  value="Home" action="/home.jsf?faces-redirect=true" immediate="true" ajax="false"/>
+				</p:toolbarGroup>
+				<p:toolbarGroup align="left">
+					<p:commandLink  value="Novo contato" action="/adicionar.jsf?faces-redirect=true" immediate="true" ajax="false" style="margin:20px"/>				
+				</p:toolbarGroup>
+				
+			</p:toolbar>
+			
+			<br/><br/>
+			
+			<h:outputText value="O contato foi excluido com sucesso! "/><p:commandLink  value="Clique aqui para voltar" action="/home.jsf?faces-redirect=true" immediate="true" ajax="false"/>
+		
+		</p:panel>			
+		<br/>
+		
+		
+	</h:form>
+
+    </h:body>
+</html>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13856761490480" configfile="/CRUDAgendaWeb/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="946" id="pf138584577325912" outlinks="pf13861285626460 pf13861768715111 pf13861865621333 pf13862109951190 pf13862109951191" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="cadastro_ok.jsf?faces-redirect=true" x="338" y="178" id="pf13861285626461" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf13861285626460" path="/cadastro_ok.jsf?faces-redirect=true"/>
+  <nodes xsi:type="pageflow:PFPage" name="home.jsf?faces-redirect=true" x="338" y="562" id="pf13861768715112" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf13861768715111" path="/home.jsf?faces-redirect=true"/>
+  <nodes xsi:type="pageflow:PFPage" name="visualizar.jsf?faces-redirect=true" x="338" y="946" id="pf13861865621334" referenceLink="//@navigationRule.0/@navigationCase.3/@toViewId|" inlinks="pf13861865621333 pf13862109951190" path="/visualizar.jsf?faces-redirect=true"/>
+  <nodes xsi:type="pageflow:PFPage" name="remove_ok.jsf?faces-redirect=true" x="338" y="1330" id="pf13862109951192" referenceLink="//@navigationRule.0/@navigationCase.4/@toViewId|" inlinks="pf13862109951191" path="/remove_ok.jsf?faces-redirect=true"/>
+  <links id="pf13861285626460" target="pf13861285626461" source="pf138584577325912" outcome="cadastro_ok" fromaction="#{contatoBean.adicionarContato}"/>
+  <links id="pf13861768715111" target="pf13861768715112" source="pf138584577325912" outcome="home" redirect="true" fromaction="#{loginBean.efetuarLogin}"/>
+  <links id="pf13861865621333" target="pf13861865621334" source="pf138584577325912" outcome="visualizar" fromaction="#{contatoVisualBean.visualizarID}"/>
+  <links id="pf13862109951190" target="pf13861865621334" source="pf138584577325912" outcome="visualizar" fromaction="#{contatoVisualBean.salvarAlteracoes}"/>
+  <links id="pf13862109951191" target="pf13862109951192" source="pf138584577325912" outcome="remove_ok" fromaction="#{contatoVisualBean.excluirContato}"/>
+</pageflow:Pageflow>

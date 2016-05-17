@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
+    version="2.1">
+    
+    <navigation-rule>
+    	<navigation-case>
+    		<from-action>#{loginBean.efetuarLogin}</from-action>
+    		<from-outcome>home</from-outcome>    		
+    		<to-view-id>/home.jsf?faces-redirect=true</to-view-id>
+    		 <redirect/>
+    	</navigation-case>
+    	<navigation-case>
+    		<from-action>#{contatoBean.adicionarContato}</from-action>
+    		<from-outcome>cadastro_ok</from-outcome>    		
+    		<to-view-id>/cadastro_ok.jsf?faces-redirect=true</to-view-id>
+    	</navigation-case>
+    	<navigation-case>
+    		<from-action>#{contatoVisualBean.visualizarID}</from-action>
+    		<from-outcome>visualizar</from-outcome>    		
+    		<to-view-id>/visualizar.jsf?faces-redirect=true</to-view-id>
+    	</navigation-case>
+    	<navigation-case>
+    		<from-action>#{contatoVisualBean.salvarAlteracoes}</from-action>
+    		<from-outcome>visualizar</from-outcome>    		
+    		<to-view-id>/visualizar.jsf?faces-redirect=true</to-view-id>
+    	</navigation-case>
+    	<navigation-case>
+    		<from-action>#{contatoVisualBean.excluirContato}</from-action>
+    		<from-outcome>remove_ok</from-outcome>    		
+    		<to-view-id>/remove_ok.jsf?faces-redirect=true</to-view-id>
+    	</navigation-case>
+    </navigation-rule>
+    
+</faces-config>
